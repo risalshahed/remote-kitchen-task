@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "task": "JavaScript",
+    "category": "language",
+    "date": "April 5, 2024",
+    "priority": "high"
+  },
+  {
+    "id": 2,
+    "task": "React",
+    "category": "library",
+    "date": "April 25, 2024",
+    "priority": "high"
+  },
+  {
+    "id": 3,
+    "task": "Redux",
+    "category": "state",
+    "date": "May 7, 2024",
+    "priority": "medium"
+  },
+  {
+    "id": 4,
+    "task": "Tailwind CSS",
+    "category": "design",
+    "date": "March 31, 2024",
+    "priority": "high"
+  }
+]
