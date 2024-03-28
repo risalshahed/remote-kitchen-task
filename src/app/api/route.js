@@ -28,14 +28,16 @@ export async function POST(req) {
     const { task, category, date, priority } = await req.json();
     // generate id for the new task
     const id = crypto.randomBytes(16).toString('hex');
+    // create new task object
+    const newTask = { id, task, category, date, priority }
     // add new task to the json array
-    jsonArray.push({ id, task, category, date, priority })
+    jsonArray.push(newTask)
     // convert JSON back to string
     const updatedTask = JSON.stringify(jsonArray);
     // write updated task to json file
     await fsPromises.writeFile(filePath, updatedTask);
     return new NextResponse(
-      JSON.stringify({ message: 'Successfully Data Created' }),
+      JSON.stringify(newTask),
       { status: 201, headers: {'content-type': 'application/json'} }
     )
   } catch(error) {

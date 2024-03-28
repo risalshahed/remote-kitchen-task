@@ -2,15 +2,15 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'api' }),
   tagTypes: ['Task'],
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getTasks: builder.query({
       query: () => '/',
       providesTags: ['Task'],
     }),
     addTask: builder.mutation({
-      query: (task) => ({
+      query: task => ({
         url: '/',
         method: 'POST',
         body: task,
@@ -18,15 +18,15 @@ export const tasksApi = createApi({
       invalidatesTags: ['Task'],
     }),
     updateTask: builder.mutation({
-      query: ({ id, ...rest }) => ({
+      query: ({ id, task }) => ({
         url: `/${id}`,
         method: 'PATCH',
-        body: rest,
+        body: task,
       }),
       invalidatesTags: ['Task'],
     }),
     deleteTask: builder.mutation({
-      query: (id) => ({
+      query: id => ({
         url: `/${id}`,
         method: 'DELETE',
       }),
