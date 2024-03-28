@@ -1,54 +1,37 @@
 import { NextResponse } from 'next/server';
 import fsPromises from 'fs/promises';
 import path from 'path';
-import crypto from 'crypto';
 
-const filePath = path.join(process.cwd(), 'public/tasks.json');
+const filePath = path.join(process.cwd(), 'data', 'tasks.json');
 
-// GET Tasks
-export async function GET() {
+export async function GET(req) {
+  const { params } = req;
+  const { id } = params;
+
   try {
-    const tasks = await fsPromises.readFile(filePath, 'utf-8');
-    const json = await JSON.parse(tasks);
-    return NextResponse.json(json);
-  } catch(error) {
-    return new NextResponse(
-      JSON.stringify({ message: 'No Tasks Found' }),
-      { status: 404, headers: {'content-type': 'application/json'} }
-    )
+    const data = await fsPromises.readFile(filePath, 'utf-8');
+    const tasks = JSON.parse(data);
+    const task = tasks.find(t => t.id === id);
+
+    if (!task) {
+      return new NextResponse(null, { status: 404 });
+    }
+
+    return new NextResponse(JSON.stringify(task), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    return new NextResponse(JSON.stringify({ message: 'Error retrieving task' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
-  
-// POST a Task
-export async function POST(req) {
-  try {
-    const tasks = await fsPromises.readFile(filePath, 'utf-8');
-    const jsonArray = await JSON.parse(tasks);
-    // destructure from req body (id lagbe na, cz new task er id server generate kore dbe!)
-    const { task, category, date, completed } = await req.json();
-    // generate id for the new task
-    const id = crypto.randomBytes(16).toString('hex');
-    // create new task object
-    const newTask = { id, task, category, date, completed }
-    // add new task to the json array
-    jsonArray.push(newTask)
-    // convert JSON back to string
-    const updatedTask = JSON.stringify(jsonArray);
-    // write updated task to json file
-    await fsPromises.writeFile(filePath, updatedTask);
-    return new NextResponse(
-      JSON.stringify(newTask),
-      { status: 201, headers: {'content-type': 'application/json'} }
-    )
-  } catch(error) {
-    return new NextResponse(
-      JSON.stringify({ message: 'Error reading or parsing the json file' }),
-      { status: 500, headers: {'content-type': 'application/json'} }
-    )
-  }
-}
-    
-/* // UPDATE a Task
+
+// UPDATE a Task
 export async function PATCH(req) {
   try {
     const tasks = await fsPromises.readFile(filePath, 'utf-8');
@@ -127,4 +110,4 @@ export async function DELETE(req) {
       { status: 500, headers: {'content-type': 'application/json'} }
     )
   }
-} */
+}
