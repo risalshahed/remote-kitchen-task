@@ -16,7 +16,8 @@ export default function EachTask({ eachTask }) {
   };
 
   const handleDelete = async () => {
-    await deleteTask(id);
+    const isConfimed = confirm("Are you sure you want to delete this task?");
+    isConfimed && await deleteTask(id);
   };
 
   const handleEditSave = async () => {
@@ -59,12 +60,12 @@ export default function EachTask({ eachTask }) {
         </div>
 
         <div className="flex items-center gap-x-2 sm:gap-x-8">
-          <button onClick={handleDelete} className="btn bg-red-600 text-white px-2 py-0.25 rounded-md">
+          <button onClick={handleDelete} className="bg-red-700 hover:bg-red-600 text-white px-3 py-0.5 rounded-md">
             Delete
           </button>
 
-          <button onClick={handleEditSave} className="btn bg-blue-500 text-white px-2 py-0.5 rounded-md">
-            {isEditing ? 'Save' : 'Edit'}
+          <button onClick={handleEditSave} className="bg-blue-700 hover:bg-blue-600 text-white px-3 py-0.5 rounded-md">
+            {isEditing ? 'Save' : 'Update'}
           </button>
         </div>
       </div>

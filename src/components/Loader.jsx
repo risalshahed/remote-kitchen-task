@@ -1,25 +1,14 @@
 export default function Loader() {
   return (
-    <div className="w-full col-span-12 sm:col-span-6 md:col-span-3 flex flex-col animate-pulse">
-      <div className="relative">
-        <div className="aspect-video bg-slate-200" />
-      </div>
-
-      <div className="flex flex-row mt-2 gap-2 items-center">
-        <div className="bg-slate-200 rounded-full h-8 w-8 shrink-0" />
-
-        <div className="flex flex-col space-y-1 grow">
-          <p className="bg-slate-200 text-slate-200 text-[8px]">
-            Loading...
-          </p>
-          <p className="bg-slate-200 text-slate-200 text-[8px]">
-            Loading...
-          </p>
-          <p className="bg-slate-200 text-slate-200 text-[8px]">
-            Loading...
-          </p>
-        </div>
-      </div>
+    <div className="flex justify-center my-8">
+      <span className="loading loading-spinner text-primary"></span>
+      <span className="loading loading-spinner text-secondary"></span>
+      <span className="loading loading-spinner text-accent"></span>
+      <span className="loading loading-spinner text-neutral"></span>
+      <span className="loading loading-spinner text-info"></span>
+      <span className="loading loading-spinner text-success"></span>
+      <span className="loading loading-spinner text-warning"></span>
+      <span className="loading loading-spinner text-error"></span>
     </div>
   );
 }
