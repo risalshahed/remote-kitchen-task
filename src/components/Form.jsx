@@ -10,19 +10,25 @@ export default function Form() {
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
 
-  // { task: '', category: '', date: '', priority: '' }
-
   const handleSubmit = e => {
     e.preventDefault();
     // setFormData({ task: '', category: '', date: '', priority: '' })
-    if(task && category && date) {
-      addTask({ task, category, date })
-      // clear input fields
-      setTask('');
-      setCategory('');
-      setDate('');
+
+    // Convert both dates to the comparable format
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    if (task && category && date) {
+      if (date >= currentDate) {
+        addTask({ task, category, date });
+        // Clear input fields after adding the task
+        setTask('');
+        setCategory('');
+        setDate('');
+      } else {
+        alert('Please select a future date for the task.');
+      }
     } else {
-      alert('Please Select All the Fields')
+      alert('Please select all the fields.');
     }
   }
 
@@ -53,6 +59,8 @@ export default function Form() {
           <option value="design">Design</option>
           <option value="language">Language</option>
           <option value="library">Library</option>
+          <option value="framework">Framework</option>
+          <option value="ftate">State Management</option>
         </select>
       </div>
       {/* Date */}

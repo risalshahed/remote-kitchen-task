@@ -12,7 +12,7 @@ export default function EachTask({ eachTask }) {
   // console.log('update', update);
 
   const handleStatusChange = async () => {
-    await updateTask({ id, task: { ...eachTask, completed: !completed } });
+    await updateTask({ id, ...eachTask, completed: !completed });
   };
 
   const handleDelete = async () => {
@@ -28,7 +28,7 @@ export default function EachTask({ eachTask }) {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-y-3 py-3 hover:bg-gray-100">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-y-3 py-3 hover:bg-gray-100 sm:px-8">
         <div className="flex flex-col sm:flex-row items-center gap-x-3 sm:gap-x-8 gap-y-2 px-1 sm:px-8">
           <div className='flex gap-x-2 items-center'>
             <input
