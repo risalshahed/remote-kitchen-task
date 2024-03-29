@@ -1,14 +1,23 @@
 # Task Management Application
 
-[Live Website](http://localhost:3000)
-
 ## Technologies used
 - Next JS 14 App Router
 - Redux RTK Query
 - Tailwind CSS
 - Daisy UI
 
-## Getting Started
+[Front End Live Website](https://task-management-ap.netlify.app)
+
+(Not Accessible to full CRUD Operations as it's only the view part)
+
+To get full acess of the server & be adle to see all CRUD Operations
+```bash
+git clone https://github.com/risalshahed/remote-kitchen-task.git
+cd remote-kitchen-task
+yarn
+yarn dev
+```
+And Open the URL of the Local Repository
 
 ### Server Side
 - Initial data in data/tasks.json
