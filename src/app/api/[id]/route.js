@@ -17,10 +17,10 @@ export async function DELETE(req, { params }) {
     const { id } = params;
 
     // find the index of the task to edit
-    console.log("jsonArray", jsonArray);
+    // console.log("jsonArray", jsonArray);
     const taskIndex = await jsonArray.findIndex((task) => task.id == id);
 
-    console.log("taskIndex", taskIndex);
+    // console.log("taskIndex", taskIndex);
     // if task not found, return 404
     if (taskIndex < 0) {
       return new NextResponse(JSON.stringify({ message: "No Tasks Found" }), {
@@ -34,7 +34,7 @@ export async function DELETE(req, { params }) {
     // convert JSON back to string
     const updatedTask = JSON.stringify(newArray);
     // write the updated task to the json file
-    console.log("updatedTask", updatedTask);
+    // console.log("updatedTask", updatedTask);
     await fsPromises.writeFile(filePath, updatedTask);
 
     return new NextResponse(JSON.stringify(newArray), {
@@ -52,7 +52,7 @@ export async function DELETE(req, { params }) {
 
 // UPDATE a Task
 export async function PATCH(req, { params }) {
-  console.log("Update Request");
+  // console.log("Update Request");
   try {
     const tasks = await fsPromises.readFile(filePath, "utf-8");
     const jsonArray = JSON.parse(tasks);
@@ -90,7 +90,7 @@ export async function PATCH(req, { params }) {
       { status: 200, headers: { "content-type": "application/json" } }
     );
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return new NextResponse(
       JSON.stringify({ message: "Error reading or parsing the json file" }),
       { status: 404, headers: { "content-type": "application/json" } }

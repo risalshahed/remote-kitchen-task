@@ -5,7 +5,7 @@ import Toast from './Toast';
 export default function Form() {
   const [addTask, { data: tasks }] = useAddTaskMutation();
 
-  console.log('task', tasks);
+  // console.log('task', tasks);
 
   const [task, setTask] = useState('');
   const [category, setCategory] = useState('');
@@ -66,7 +66,7 @@ export default function Form() {
             <option value="language">Language</option>
             <option value="library">Library</option>
             <option value="framework">Framework</option>
-            <option value="ftate">State Management</option>
+            <option value="state">State Management</option>
           </select>
         </div>
         {/* Date */}

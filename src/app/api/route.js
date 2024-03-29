@@ -5,17 +5,17 @@ import crypto from 'crypto';
 
 const filePath = path.join(process.cwd(), 'data/tasks.json');
 
-console.log('filePath', filePath)
+// console.log('filePath', filePath)
 
 // GET Tasks
 export async function GET() {
   try {
-    console.log('Get From Here')
+    // console.log('Get From Here')
     const tasks = await fsPromises.readFile(filePath, 'utf-8');
     const json = await JSON.parse(tasks);
     return NextResponse.json(json);
   } catch(error) {
-    console.log(error)
+    // console.log(error)
     return new NextResponse(
       JSON.stringify({ message: 'No Tasks Found' }),
       { status: 404, headers: {'content-type': 'application/json'} }
