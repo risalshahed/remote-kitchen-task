@@ -48,7 +48,7 @@ export async function POST(req) {
   }
 }
     
-/* // UPDATE a Task
+// UPDATE a Task
 export async function PATCH(req) {
   try {
     const tasks = await fsPromises.readFile(filePath, 'utf-8');
@@ -111,14 +111,15 @@ export async function DELETE(req) {
       )
     }
     // remove task from json array
-    await jsonArray.splice(taskIndex, 1);
+    // await jsonArray.splice(taskIndex, 1);
+    const newArray = jsonArray.filter(j => j.id != id)
     // convert JSON back to string
-    const updatedTask = JSON.stringify(jsonArray);
+    const updatedTask = JSON.stringify(newArray);
     // write the updated task to the json file
     await fsPromises.writeFile(filePath, updatedTask);
     
     return new NextResponse(
-      JSON.stringify({ message: 'Task Successully Removed' }),
+      JSON.stringify(newArray),
       { status: 200, headers: {'content-type': 'application/json'} }
     )
   } catch(error) {
@@ -127,4 +128,4 @@ export async function DELETE(req) {
       { status: 500, headers: {'content-type': 'application/json'} }
     )
   }
-} */
+}

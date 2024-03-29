@@ -10,7 +10,8 @@ export const tasksApi = createApi({
       providesTags: ['Task'],
     }),
     getTask: builder.query({
-      query: id => `/${id}`
+      query: id => `/${id}`,
+      invalidatesTags: ['Task'],
     }),
     addTask: builder.mutation({
       query: task => ({

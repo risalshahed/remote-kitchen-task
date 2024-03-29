@@ -17,12 +17,16 @@ export default function Form() {
     // setFormData({ task: '', category: '', date: '', priority: '' })
     if(task && category && date) {
       addTask({ task, category, date })
+      // clear input fields
+      setTask('');
+      setCategory('');
+      setDate('');
     } else {
       alert('Please Select All the Fields')
     }
   }
 
-  console.log(task);
+  // console.log(task);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -31,7 +35,7 @@ export default function Form() {
         <input
           type="text"
           placeholder="Add Your Task"
-          className="w-2/3 px-4 py-2 border rounded-md block mx-auto"
+          className="w-5/6 sm:w-2/3 px-4 py-2 border rounded-md block mx-auto"
           name='task'
           value={task}
           onChange={e => setTask(e.target.value)}
